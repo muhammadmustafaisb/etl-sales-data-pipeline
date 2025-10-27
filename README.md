@@ -20,7 +20,7 @@ Reads data from two JSON files:
 
 ### Transform
 
-Cleans and validates customer and sales data:
+- Cleans and validates customer and sales data:
 
 - Removes missing or invalid customer_id entries.
 
@@ -28,13 +28,19 @@ Cleans and validates customer and sales data:
 
 - Fills missing loyalty_points with 0.
 
-- Calculates total_price = quantity * product.price.
+- Calculates total_price = quantity × product.price.
 
-- Cleans customer_name (removes invalid characters, truncates >100 chars).
+- Cleans customer_name by:
 
-- Validates emails and replaces invalid ones with invalid_email@example.com.
+- Removing numeric digits (e.g., "John Smith 2" → "John Smith").
+
+- Removing invalid/special characters and truncating names longer than 100 characters.
+
+- Validates email and replaces invalid ones with invalid_email@example.com.
 
 - Corrects malformed customer_id values using regex.
+
+- Formats customer_id to always have a 3-digit suffix (e.g., "C01" → "C001").
 
 - Extracts product information into a separate DataFrame.
 
@@ -121,7 +127,7 @@ The script creates a logs/etl_error_log.txt file to record:
 
 ### Customers Table
 
-<img width="1135" height="524" alt="image" src="https://github.com/user-attachments/assets/177d1d3d-b3d8-4b2f-adf6-fd935fc288a5" />
+<img width="1114" height="542" alt="image" src="https://github.com/user-attachments/assets/720f30af-59a8-45dc-acf3-52616e48d8ed" />
 
 ### Products Table
 
